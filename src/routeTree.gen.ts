@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ShopWatchIdRouteImport } from './routes/shop.$watchId'
 import { Route as WatchesWatchIdRouteImport } from './routes/watches.$watchId'
@@ -37,6 +38,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionRoute = CollectionRouteImport.update({
+  id: '/collection',
+  path: '/collection',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/checkout': typeof CheckoutRoute
+  '/collection': typeof CollectionRoute
   '/reset-password': typeof ResetPasswordRoute
   '/shop/$watchId': typeof ShopWatchIdRoute
   '/watches/$watchId': typeof WatchesWatchIdRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/checkout': typeof CheckoutRoute
+  '/collection': typeof CollectionRoute
   '/reset-password': typeof ResetPasswordRoute
   '/shop/$watchId': typeof ShopWatchIdRoute
   '/watches/$watchId': typeof WatchesWatchIdRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/checkout': typeof CheckoutRoute
+  '/collection': typeof CollectionRoute
   '/reset-password': typeof ResetPasswordRoute
   '/shop/$watchId': typeof ShopWatchIdRoute
   '/watches/$watchId': typeof WatchesWatchIdRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/checkout'
+    | '/collection'
     | '/reset-password'
     | '/shop/$watchId'
     | '/watches/$watchId'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/checkout'
+    | '/collection'
     | '/reset-password'
     | '/shop/$watchId'
     | '/watches/$watchId'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/checkout'
+    | '/collection'
     | '/reset-password'
     | '/shop/$watchId'
     | '/watches/$watchId'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AuthRoute: typeof AuthRoute
   CheckoutRoute: typeof CheckoutRoute
+  CollectionRoute: typeof CollectionRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ShopWatchIdRoute: typeof ShopWatchIdRoute
   WatchesWatchIdRoute: typeof WatchesWatchIdRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collection': {
+      id: '/collection'
+      path: '/collection'
+      fullPath: '/collection'
+      preLoaderRoute: typeof CollectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AuthRoute: AuthRoute,
   CheckoutRoute: CheckoutRoute,
+  CollectionRoute: CollectionRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ShopWatchIdRoute: ShopWatchIdRoute,
   WatchesWatchIdRoute: WatchesWatchIdRoute,
