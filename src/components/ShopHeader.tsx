@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/compone
 import { cart, useCart } from '@/lib/cart';
 import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
+import { BottomNav } from '@/components/BottomNav';
 
 // Contact links — placeholders until the owner shares real accounts.
 const contacts = [
@@ -101,5 +102,6 @@ export function ShopHeader() {
         : <button type="button" className="shop-login-link" onClick={() => setLogin(true)}><UserRound size={16} /> Login / Register</button>}
     </div>
     <MobileLogin open={login} onOpenChange={setLogin} />
+    <BottomNav />
   </header>;
 }

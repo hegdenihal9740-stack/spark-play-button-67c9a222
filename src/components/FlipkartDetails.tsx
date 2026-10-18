@@ -1,4 +1,5 @@
-import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck, MapPin } from 'lucide-react';
+import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck, MapPin, Heart } from 'lucide-react';
+import { useWishlist, wishlist } from '@/lib/wishlist';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
@@ -48,6 +49,7 @@ export function FlipkartDetails({
   const m = cardMeta[active];
   const w = watches.find((x) => x.id === active)!;
   const price = prices[w.id];
+  const wish = useWishlist();
   const imgs = [w.image, `${FEAT}${w.id}`, life[w.id], ...extra[w.id]];
   const feat = <FeatureCard img={w.image} labels={m.specs} />;
   const [dial, setDial] = useState('42 mm');
@@ -86,6 +88,7 @@ export function FlipkartDetails({
         <div className="fk-grid">
           <div className="fk-left">
             <span className="fk-index">{String(idx + 1).padStart(2, '0')} / {String(imgs.length).padStart(2, '0')}</span>
+            <button type="button" className={`fk-wish ${wish.includes(w.id) ? 'is-on' : ''}`} aria-label="Add to wishlist" onClick={() => toast.success(wishlist.toggle(w.id) ? 'Added to wishlist' : 'Removed from wishlist')}><Heart size={18} fill={wish.includes(w.id) ? 'currentColor' : 'none'} /></button>
             {isFeat(imgs[idx]) ? <div className="fk-imgbox is-feat">{feat}</div> : <button type="button" className="fk-imgbox" onClick={() => setFull(true)} aria-label="Open full image view"><img src={imgs[idx]} alt={w.name} /><span className="fk-zoomhint"><ZoomIn size={13} /> View full</span></button>}
             <div className="fk-thumbs">{imgs.map((src, i) => (
               <button type="button" key={src} className={`fk-thumb ${i === idx ? 'is-active' : ''}`} onClick={() => setIdx(i)}>{isFeat(src) ? <span className="fk-thumb-vid">Key</span> : <img src={src} alt="" />}</button>
